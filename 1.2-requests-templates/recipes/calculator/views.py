@@ -19,6 +19,60 @@ DATA = {
     # можете добавить свои рецепты ;)
 }
 
+
+def pasta_reciept(request):
+    context = {
+        "recipe":{
+            'макароны, г': 0.3,
+            'сыр, г': 0.05,
+        }
+    }
+    if request.GET.get("servings") is not None:
+        param = int(request.GET.get("servings"))
+        for element in context['recipe'].items():
+            name, quantity = element[0], element[1]
+            context['recipe'][name] = quantity * param
+        return render(request, 'calculator/index.html', context=context)
+    else:
+        return render(request, 'calculator/index.html', context=context)
+
+def omlet_reciept(request):
+    context = {
+        'recipe': {
+        'яйца, шт': 2,
+        'молоко, л': 0.1,
+        'соль, ч.л.': 0.5,
+        },
+    }
+    if request.GET.get("servings") is not None:
+        param = int(request.GET.get("servings"))
+        for element in context['recipe'].items():
+            name, quantity = element[0], element[1]
+            context['recipe'][name] = quantity * param
+        return render(request, 'calculator/index.html', context=context)
+    else:
+        return render(request, 'calculator/index.html', context=context)
+
+
+def butter_reciept(request):
+    context={
+        'recipe':{
+        'хлеб, ломтик': 1,
+        'колбаса, ломтик': 1,
+        'сыр, ломтик': 1,
+        'помидор, ломтик': 1,
+        }
+    }
+    if request.GET.get("servings") is not None:
+        param = int(request.GET.get("servings"))
+        for element in context['recipe'].items():
+            name, quantity=element[0], element[1]
+            context['recipe'][name]=quantity*param
+        return render(request,'calculator/index.html', context=context)
+    else:
+        return render(request, 'calculator/index.html', context=context)
+
+
 # Напишите ваш обработчик. Используйте DATA как источник данных
 # Результат - render(request, 'calculator/index.html', context)
 # В качестве контекста должен быть передан словарь с рецептом:
